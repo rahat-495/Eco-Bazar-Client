@@ -1,21 +1,41 @@
 
 "use client"
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaEye } from 'react-icons/fa';
 import { LuEyeClosed } from "react-icons/lu";
+import { useDispatch } from "react-redux";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import { setUser } from "../redux/features/user/userSlice";
+import axios from "axios";
 
 const loginPage = () => {
 
     const [passType , setPassType] = useState(false) ;
+    const router = useRouter() ;
+    const dispatch = useDispatch() ;
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault() ;
         const form = e.target ;
         const email = form.email.value ;
         const phone = form.phone.value ;
         const password = form.password.value ;
-        console.log(email , phone , password);
+        const userData = {email , phone , password} ;
+        const {data} = await axios.post("http://localhost:5555/api/v1/auth/login-user" , userData , {withCredentials : true} ) ;
+
+        const {profileImage , role , name} = data?.data?.userData ;
+
+        if(data?.success){
+            dispatch(setUser({name , email , phone , profileImage , role}))
+            localStorage.removeItem("token") ;
+            localStorage.setItem('token' , data?.data?.token) ;
+            toast.success("User login Successfull !") ;
+            setTimeout(() => {
+                router.push('/') ;
+            }, 1000);
+        }
     }
 
     return (
@@ -37,6 +57,19 @@ const loginPage = () => {
                 </form>
                 <p className="mt-4">Don't have an account <Link className="text-[#36f63d]" href={'/register'}>Register</Link></p>
             </div>
+            <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover={false}
+            theme="light"
+            transition={Bounce}
+            />
         </div>
     );
 };

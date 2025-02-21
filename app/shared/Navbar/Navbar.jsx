@@ -1,7 +1,14 @@
+
 "use client"
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import Image from "next/image";
+import { useState } from "react";
 
 const Navbar = () => {
+
+    const userData = useSelector(state => state.user) ;
+    const [isMouseEnter , setIsMouseEnter] = useState(false) ;
 
     const navlist = [
         {
@@ -22,7 +29,7 @@ const Navbar = () => {
             <div className="flex items-center gap-5">
                 {navlist?.map(list => <Link key={list.path} className="text-xl hover:text-[#36f63d] duration-200" href={list?.path}>{list?.name}</Link>)}
                 {
-                    !isUserLogin &&
+                    !isUserLogin ?
                     <div className="">
                         <Link href={'/login'}>
                             <button className="border border-black hover:border-[#36f63d] hover:text-[#2dcb32] duration-300 rounded-md py-1 px-3 mx-1">Login</button>
@@ -30,6 +37,10 @@ const Navbar = () => {
                         <Link href={'/register'}>
                             <button className="border border-black hover:border-[#36f63d] hover:text-[#2dcb32] duration-300 rounded-md py-1 px-3 mx-1">Register</button>
                         </Link>
+                    </div> :
+                    <div className="w-10 h-10 relative rounded-full" onMouseEnter={() => setIsMouseEnter(true)} onMouseOut={() => setIsMouseEnter(false)}>
+                        <Image src={userData?.profileIamge ? userData?.profileIamge : '/logo.png'} alt="User Logo" width={'40'} height={'40'} className="w-full rounded-full cursor-pointer"/>
+                        <div className="absolute top-5 min-h-5 w-5">{userData?.name}</div>
                     </div>
                 }
             </div>
