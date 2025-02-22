@@ -5,7 +5,6 @@ export default async function Home(){
 
   const res = await fetch('http://localhost:5555/api/v1/items' , {method : 'GET'}) ;
   const {data} = await res.json() ;
-  console.log(data);
 
   return (
     <div className="min-h-screen fle flex-col items-center justify-center"> 

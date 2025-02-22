@@ -16,7 +16,7 @@ const registerPage = () => {
     const router = useRouter() ;
     const dispatch = useDispatch() ;
     
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault() ;
         const form = e.target ;
         const name = form.name.value ;
@@ -51,7 +51,7 @@ const registerPage = () => {
             <div className="min-h-[80vh] ms-auto w-full flex flex-col items-center justify-center gro">
                 <div className="bg-[#09280990] border border-[#36f63d] bg-opacity-25 w-80 py-5 flex flex-col items-center justify-center rounded-md">
                     <h1 className="text-2xl mb-8 font-semibold">Register</h1>
-                    <form onSubmit={handleLogin} className="flex flex-col gap-3 w-full px-5">
+                    <form onSubmit={handleRegister} className="flex flex-col gap-3 w-full px-5">
                         <input name="name" type="text" className="focus:border-[#36f63d] border w-full rounded px-3 py-1 text-lg duration-300 focus:outline-none" placeholder="Full Name"/>
                         <input name="image" type="file" className="focus:border-[#36f63d] border w-full rounded px-3 py-1 text-lg duration-300 focus:outline-none" placeholder="Full Name"/>
                         <input name="email" type="text" className="focus:border-[#36f63d] border w-full rounded px-3 py-1 text-lg duration-300 focus:outline-none" placeholder="Email"/>

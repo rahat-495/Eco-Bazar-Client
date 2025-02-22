@@ -25,6 +25,10 @@ const NavbarCompnents = () => {
             name : "About" ,
             path : "/about" ,
         },
+        {
+            name : "Add Item" ,
+            path : "/add-item" ,
+        },
     ]
     
     useEffect(() => {
@@ -45,7 +49,7 @@ const NavbarCompnents = () => {
             })
             .catch((err) => console.error("Error fetching user data:", err));
         }
-    }, [isUserLogin]);
+    }, [isUserLogin , userData]);
     
     const handleLogOut = () => {
         axios.post("http://localhost:5555/api/v1/auth/logOut", {} , {
