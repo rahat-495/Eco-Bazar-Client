@@ -22,12 +22,12 @@ const NavbarCompnents = () => {
             path : "/" ,
         },
         {
-            name : "About" ,
-            path : "/about" ,
+            name : "Add Product" ,
+            path : "/add-product" ,
         },
         {
-            name : "Add Item" ,
-            path : "/add-item" ,
+            name : "All Products" ,
+            path : "/all-products" ,
         },
     ]
     
