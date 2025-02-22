@@ -34,6 +34,7 @@ const loginPage = () => {
             toast.success("User login Successfull !") ;
             setTimeout(() => {
                 router.push('/') ;
+                window.location.reload() ;
             }, 1000);
         }
     }

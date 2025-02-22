@@ -1,49 +1,12 @@
 
-"use client"
-import Link from "next/link";
-import { useSelector } from "react-redux";
-import Image from "next/image";
-import { useState } from "react";
+import NavbarCompnents from "@/app/components/NavbarComponents";
 
-const Navbar = () => {
-
-    const userData = useSelector(state => state.user) ;
-    const [isMouseEnter , setIsMouseEnter] = useState(false) ;
-
-    const navlist = [
-        {
-            name : "Home" ,
-            path : "/" ,
-        },
-        {
-            name : "About" ,
-            path : "/about" ,
-        },
-    ]
-
-    const isUserLogin = localStorage.getItem("token") ;
+const Navbar = async () => {
 
     return (
-        <div className={`gro sticky top-0 flex justify-between text-black py-3 max-w-[1440px] mx-auto`}>
+        <div className={`gro sticky z-50 bg-white bg-opacity-25 backdrop-blur-md top-0 flex justify-between text-black py-3 max-w-[1440px] mx-auto`}>
             <h1 className="font-semibold text-3xl">EcoMart</h1>
-            <div className="flex items-center gap-5">
-                {navlist?.map(list => <Link key={list.path} className="text-xl hover:text-[#36f63d] duration-200" href={list?.path}>{list?.name}</Link>)}
-                {
-                    !isUserLogin ?
-                    <div className="">
-                        <Link href={'/login'}>
-                            <button className="border border-black hover:border-[#36f63d] hover:text-[#2dcb32] duration-300 rounded-md py-1 px-3 mx-1">Login</button>
-                        </Link>
-                        <Link href={'/register'}>
-                            <button className="border border-black hover:border-[#36f63d] hover:text-[#2dcb32] duration-300 rounded-md py-1 px-3 mx-1">Register</button>
-                        </Link>
-                    </div> :
-                    <div className="w-10 h-10 relative rounded-full" onMouseEnter={() => setIsMouseEnter(true)} onMouseOut={() => setIsMouseEnter(false)}>
-                        <Image src={userData?.profileIamge ? userData?.profileIamge : '/logo.png'} alt="User Logo" width={'40'} height={'40'} className="w-full rounded-full cursor-pointer"/>
-                        <div className="absolute top-5 min-h-5 w-5">{userData?.name}</div>
-                    </div>
-                }
-            </div>
+            <NavbarCompnents />
         </div>
     );
 };

@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Navbar />
           
-          <div className="max-w-[1440px] mx-auto">
+          <div className="max-w-[1440px] mx-auto my-5">
             {children}
           </div>
 
